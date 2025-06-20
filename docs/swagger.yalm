@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: API Anti-Social
+  version: 1.0.0
+  description: Documentación de la API para el proyecto Anti-Social
+
+servers:
+  - url: http://localhost:3000/api
+    description: Servidor local de desarrollo
+
+paths:
+
+  /users:
+    post:
+      summary: Crear un nuevo usuario
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInput'
+      responses:
+        '201':
+          description: Usuario creado con éxito
+        '400':
+          description: Error de validación
+
+    get:
+      summary: Obtener todos los usuarios
+      tags: [User]
+      responses:
+        '200':
+          description: Lista de usuarios
+
+  /posts:
+    post:
+      summary: Crear un nuevo post
+      tags: [Post]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostInput'
+      responses:
+        '201':
+          description: Post creado
+
+    get:
+      summary: Obtener todos los posts
+      tags: [Post]
+      responses:
+        '200':
+          description: Lista de posts
+
+  /posts/{id}:
+    get:
+      summary: Obtener detalles de un post (con comentarios visibles)
+      tags: [Post]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalles del post
+
+  /comments:
+    post:
+      summary: Crear un nuevo comentario
+      tags: [Comment]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentInput'
+      responses:
+        '201':
+          description: Comentario creado
+
+  /tags:
+    post:
+      summary: Crear una nueva etiqueta
+      tags: [Tag]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagInput'
+      responses:
+        '201':
+          description: Tag creada
+
+    get:
+      summary: Obtener todas las etiquetas
+      tags: [Tag]
+      responses:
+        '200':
+          description: Lista de tags
+
+components:
+  schemas:
+
+    UserInput:
+      type: object
+      required:
+        - nickName
+        - email
+      properties:
+        nickName:
+          type: string
+        email:
+          type: string
+
+    PostInput:
+      type: object
+      required:
+        - textoPost
+        - user
+      properties:
+        textoPost:
+          type: string
+        user:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        images:
+          type: array
+          items:
+            type: string
+
+    CommentInput:
+      type: object
+      required:
+        - content
+        - user
+        - post
+      properties:
+        content:
+          type: string
+        user:
+          type: string
+        post:
+          type: string
+
+    TagInput:
+      type: object
+      required:
+        - descripcion
+      properties:
+        descripcion:
+          type: string
