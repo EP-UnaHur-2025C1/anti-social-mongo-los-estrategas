@@ -31,6 +31,7 @@ const createUser = async (req, res) => {
   }
 };
 
+//Busca usuario por ID
 const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -41,6 +42,7 @@ const getUser = async (req, res) => {
   }
 };
 
+//Retorna todos los usuarios
 const listUsers = async (req, res) => {
   try {
     const users = await User.find();

@@ -1,7 +1,9 @@
 const Post = require('../models/Post');
-const User = require('../models/User');
-const Tag = require('../models/Tag');
-const Comment = require('../models/Comment');
+
+//BORRAR?
+const User = require('../models/user');
+const Tag = require('../models/tag');
+const Comment = require('../models/comment');
 
 // Crear post con descripción e imágenes opcionales
 const createPost = async (req, res) => {

@@ -1,4 +1,4 @@
-const Tag = require('../models/Tag');
+const Tag = require('../models/tag');
 
 // Crear tag
 const createTag = async (req, res) => {

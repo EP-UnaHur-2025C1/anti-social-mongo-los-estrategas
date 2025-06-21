@@ -1,57 +1,54 @@
-const User = require('../models/User'); // Asegurate que exista el modelo mongoose
+const Comment = require('../models/comment'); // Asegurate que exista el modelo mongoose
 
-const createUser = async (req, res) => {
+const createComment = async (req, res) => {
   try {
-    const { nickName, email } = req.body;
+    
+    const { userId, postId, content } = req.body
 
-    // Validación de campos obligatorios
-    if (!nickName || !email) {
-      return res.status(400).json({ error: 'nickName y email son obligatorios.' });
+    //Si el comentario esta vacio
+    if (!content) {
+      return res.status(400).json({ error: 'El comentario no puede estar vacio'})
     }
 
-    // Validación de formato de email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: 'Formato de email no válido.' });
+    //Si no se especifico el usuario o el post
+    if (!userId || !postId) {
+      return res.status(400).json({ error: 'Se debe indicar quien creo el comentario y a que post pertenece'})
     }
 
-    // Verificar si el email ya existe
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(409).json({ error: 'El email ya está registrado.' });
-    }
+    const comentario = new Comment({
+      content,
+      user: userId,
+      post: postId
+    })
 
-    // Crear usuario
-    const user = new User({ nickName, email });
-    await user.save();
-
-    res.status(201).json(user);
+    await comentario.save()
+    res.status(201).json(comentario)
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-const getUser = async (req, res) => {
+const getComentarios = async (_, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: 'Usuario no encontrado.' });
-    res.json(user);
+    const comentarios = await Comment.find()
+    res.json(comentarios)
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message })
   }
-};
+}
 
-const listUsers = async (req, res) => {
+const getComentarioById = async (req, res) => {
   try {
-    const users = await User.find();
-    res.json(users);
+    const comentario = await Comment.findById(req.params.id)
+    if (!comentario) return res.status(404).json({ error: 'Comentario no encontrado.' })
+    res.json(comentario)
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message })
   }
-};
+}
 
 module.exports = {
-  createUser,
-  getUser,
-  listUsers
+  createComment,
+  getComentarios,
+  getComentarioById
 };

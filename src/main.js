@@ -10,8 +10,17 @@ const PORT = process.env.PORT || 3000;
 //Middleware
 app.use(express.json());
 
+const userRoutes = require("./routes/userRoutes")
+const commentRoutes = require("./routes/commentRoutes")
+const postRoutes = require("./routes/postRoutes")
+const tagRoutes = require("./routes/tagRoutes")
+
 // Rutas
 app.use('/api/users', require('./routes/user.routes'));
+app.use('/Users', userRoutes);
+app.use('/Comments', commentRoutes);
+app.use('/Posts', postRoutes);
+app.use('/Tags', tagRoutes);
 
 //Conexion a MongoDB
 connectDB();
