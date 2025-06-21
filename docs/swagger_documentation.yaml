@@ -275,3 +275,58 @@ tags:
 - name: Tag
 - name: Comentario
 - name: Post
+
+components:
+  schemas:
+
+    UserInput:
+      type: object
+      required:
+        - nickName
+        - email
+      properties:
+        nickName:
+          type: string
+        email:
+          type: string
+
+    PostInput:
+      type: object
+      required:
+        - textoPost
+        - user
+      properties:
+        textoPost:
+          type: string
+        user:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        images:
+          type: array
+          items:
+            type: string
+
+    CommentInput:
+      type: object
+      required:
+        - content
+        - user
+        - post
+      properties:
+        content:
+          type: string
+        user:
+          type: string
+        post:
+          type: string
+
+    TagInput:
+      type: object
+      required:
+        - descripcion
+      properties:
+        descripcion:
+          type: string
