@@ -1,0 +1,277 @@
+openapi: 3.0.0
+info:
+  title: API de Red Anti-Social
+  version: 1.0.0
+  description: "Documentacion Swagger para los endpoints de la API"
+servers:
+- url: http://localhost:3000
+  description: Servidor local
+paths:
+  /users:
+    post:
+      summary: Crear un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                email:
+                  type: string
+                "contraseña":
+                  type: string
+              required:
+              - nombre
+              - email
+              - "contraseña"
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+        '400':
+          description: "Datos invalidos"
+      tags:
+      - Usuario
+    get:
+      summary: Listar todos los usuarios
+      responses:
+        '200':
+          description: Lista de usuarios
+      tags:
+      - Usuario
+  /users/{id}:
+    get:
+      summary: Obtener un usuario por ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Usuario encontrado
+        '404':
+          description: Usuario no encontrado
+      tags:
+      - Usuario
+  /tags:
+    post:
+      summary: Crear una nueva etiqueta (tag)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+              required:
+              - nombre
+      responses:
+        '201':
+          description: Etiqueta creada exitosamente
+        '400':
+          description: "Datos invalidos"
+      tags:
+      - Tag
+    get:
+      summary: Obtener todas las etiquetas
+      responses:
+        '200':
+          description: Lista de etiquetas
+      tags:
+      - Tag
+  /tags/{id}:
+    get:
+      summary: Obtener una etiqueta por ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Etiqueta encontrada
+        '404':
+          description: Etiqueta no encontrada
+      tags:
+      - Tag
+    put:
+      summary: Actualizar una etiqueta por ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+      responses:
+        '200':
+          description: Etiqueta actualizada
+        '400':
+          description: "Datos invalidos"
+      tags:
+      - Tag
+    delete:
+      summary: Eliminar una etiqueta por ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Etiqueta eliminada
+        '404':
+          description: Etiqueta no encontrada
+      tags:
+      - Tag
+  /comments:
+    post:
+      summary: Crear un nuevo comentario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contenido:
+                  type: string
+                usuarioId:
+                  type: string
+                postId:
+                  type: string
+              required:
+              - contenido
+              - usuarioId
+              - postId
+      responses:
+        '201':
+          description: Comentario creado exitosamente
+        '400':
+          description: "Datos invalidos"
+      tags:
+      - Comentario
+    get:
+      summary: Listar todos los comentarios
+      responses:
+        '200':
+          description: Lista de comentarios
+      tags:
+      - Comentario
+  /comments/{id}:
+    get:
+      summary: Obtener un comentario por ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Comentario encontrado
+        '404':
+          description: Comentario no encontrado
+      tags:
+      - Comentario
+  /posts:
+    post:
+      summary: Crear un nuevo post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                titulo:
+                  type: string
+                contenido:
+                  type: string
+                usuarioId:
+                  type: string
+              required:
+              - titulo
+              - contenido
+              - usuarioId
+      responses:
+        '201':
+          description: Post creado exitosamente
+        '400':
+          description: "Datos invalidos"
+      tags:
+      - Post
+    get:
+      summary: Obtener todos los posts
+      responses:
+        '200':
+          description: Lista de posts
+      tags:
+      - Post
+  /posts/{id}:
+    get:
+      summary: Obtener un post por ID
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Post encontrado
+        '404':
+          description: Post no encontrado
+      tags:
+      - Post
+    put:
+      summary: "Actualizar imagenes o tags de un post por ID"
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imagenes:
+                  type: array
+                  items:
+                    type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Post actualizado
+        '400':
+          description: "Datos invalidos"
+      tags:
+      - Post
+tags:
+- name: Usuario
+- name: Tag
+- name: Comentario
+- name: Post
