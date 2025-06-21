@@ -16,7 +16,7 @@ const postRoutes = require("./routes/postRoutes")
 const tagRoutes = require("./routes/tagRoutes")
 
 // Rutas
-app.use('/api/users', require('./routes/user.routes'));
+app.use('/api/users', require('./routes/userRoutes'));
 app.use('/Users', userRoutes);
 app.use('/Comments', commentRoutes);
 app.use('/Posts', postRoutes);
