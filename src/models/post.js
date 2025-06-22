@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const PostSchema = new mongoose.Schema({
   textoPost: {
     type: String,
-    required: true
+    required: [true, "El post es obligatorio"],
+    minlegth: [1, "El post no puede estar vacío"],
+    maxlength: [300, "El post debe tener menos de 300 caracteres"]
   },
   user: { // autor del post
     type: mongoose.Schema.Types.ObjectId,

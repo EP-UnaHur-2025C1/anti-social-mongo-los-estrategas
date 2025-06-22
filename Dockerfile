@@ -6,6 +6,6 @@ COPY package.json .
 
 RUN npm install --omit=dev
 
-COPY src .
+COPY . .
 
-CMD ["node", "index.js"]
+CMD ["node", "src/main.js"]

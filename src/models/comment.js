@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const CommentSchema = new mongoose.Schema({
   content: {
     type: String,
-    required: true
+    required: [true, "El comentario es obligatorio"],
+    minlength: [1, "El comentario no puede estar vacío"],
+    maxlength: [300, "El comentario debe tener menos de 300 caracteres"]
   },
   estaVisible: {
     type: Boolean,
