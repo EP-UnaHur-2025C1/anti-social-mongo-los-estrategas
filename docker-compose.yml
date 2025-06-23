@@ -1,0 +1,23 @@
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/anti-social
+    volumes:
+      - .:/app
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
