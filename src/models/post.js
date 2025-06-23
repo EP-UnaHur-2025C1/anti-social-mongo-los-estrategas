@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
-  textoPost: {
+  description: {
     type: String,
     required: [true, "El post es obligatorio"],
     minlength: [1, "El post no puede estar vacío"],
