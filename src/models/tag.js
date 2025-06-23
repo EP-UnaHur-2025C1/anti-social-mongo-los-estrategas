@@ -6,7 +6,7 @@ const TagSchema = new mongoose.Schema({
     required: [true, "El nombre del tag es obligatorio"],
     unique: true,
     minlength: [1, "El tag no puede estar vacío"],
-    maxlenghth: [30, "El tag debe tener menos de 20 caracteres"]
+    maxlength: [30, "El tag debe tener menos de 20 caracteres"]
   }
 }, {
   timestamps: false
