@@ -1,8 +1,16 @@
 const Comment = require('../models/comment'); // Asegurate que exista el modelo mongoose
+const Post = require('../models/post')
 
 const createComment = async(req, res) => {
     try {
       const comment = await Comment.create(req.body);
+      
+      //Va al post correspondiente y le agrega el comentario creado
+      await Post.findByIdAndUpdate(
+        comment.post,
+        { $push: { comments: comment._id } } // Agrega el ID del comentario al array 'comments' de post
+      );
+      
       res.status(201).json(comment);
     } catch (err) { res.status(400).json({ error: err.message });}
 };
