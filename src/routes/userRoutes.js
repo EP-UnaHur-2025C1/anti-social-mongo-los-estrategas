@@ -2,10 +2,10 @@ const { Router } = require('express')
 const userController = require('../controllers/user.controller')
 const router = Router()
 const User = require('../models/user')
-const { checkById } = require('../middleware/genericMiddleware')
+const { genericMiddleware } = require('../middleware')
 
-router.post('/', userController.createUser);
+router.post('/', genericMiddleware.checkUniqueUser, userController.createUser);
 router.get('/', userController.listUsers);
-router.get('/:id', checkById(User, "usuario") ,userController.getUser);
+router.get('/:id', genericMiddleware.checkById(User, "usuario") ,userController.getUser);
 
 module.exports = router

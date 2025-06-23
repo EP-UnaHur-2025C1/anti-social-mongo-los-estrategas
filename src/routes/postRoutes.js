@@ -2,13 +2,13 @@ const { Router } = require('express')
 const postController = require('../controllers/post.controller')
 const router = Router()
 const  Post  = require('../models/post')
-const { checkById } = require('../middleware/genericMiddleware')
+const { genericMiddleware } = require('../middleware')
 
 
 router.post('/', postController.createPost);
 router.get('/', postController.getAllPosts);
-router.get('/:id', checkById(Post, "post"), postController.getPostById);
-router.put('/:id', checkById(Post, "post"), postController.updatePostImages);
-router.put('/:id', checkById(Post, "post"), postController.updatePostTags);
+router.get('/:id', genericMiddleware.checkById(Post, "post"), postController.getPostById);
+router.put('/:id', genericMiddleware.checkById(Post, "post"), postController.updatePostImages);
+router.put('/:id', genericMiddleware.checkById(Post, "post"), postController.updatePostTags);
 
 module.exports = router

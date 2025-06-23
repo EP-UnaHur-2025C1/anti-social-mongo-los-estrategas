@@ -55,8 +55,6 @@ const getPostById = async (req, res) => {
         populate: { path: 'user', select: 'nickName' }
       });
 
-    if (!post) return res.status(404).json({ error: 'Post no encontrado' });
-
     res.json(post);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -75,8 +73,6 @@ const updatePostImages = async (req, res) => {
       { new: true }
     );
 
-    if (!post) return res.status(404).json({ error: 'Post no encontrado' });
-
     res.json(post);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -94,8 +90,6 @@ const updatePostTags = async (req, res) => {
       { tags },
       { new: true }
     ).populate('tags', 'name');
-
-    if (!post) return res.status(404).json({ error: 'Post no encontrado' });
 
     res.json(post);
   } catch (err) {
