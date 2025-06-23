@@ -8,11 +8,11 @@ const Comment = require('../models/comment');
 // Crear post con descripción e imágenes opcionales
 const createPost = async (req, res) => {
   try {
-    const { userId, description, images = [], tags = [] } = req.body;
+    const { userId, textoPost, images = [], tags = [] } = req.body;
 
     const post = new Post({
       user: userId,
-      description,
+      textoPost,
       images,
       tags
     });

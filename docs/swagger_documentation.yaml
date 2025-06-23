@@ -17,16 +17,13 @@ paths:
             schema:
               type: object
               properties:
-                nombre:
+                nickName:
                   type: string
                 email:
                   type: string
-                "contraseña":
-                  type: string
               required:
-              - nombre
+              - nickName
               - email
-              - "contraseña"
       responses:
         '201':
           description: Usuario creado exitosamente
@@ -67,10 +64,10 @@ paths:
             schema:
               type: object
               properties:
-                nombre:
+                descripcion:
                   type: string
               required:
-              - nombre
+              - descripcion
       responses:
         '201':
           description: Etiqueta creada exitosamente
@@ -116,7 +113,7 @@ paths:
             schema:
               type: object
               properties:
-                nombre:
+                descripcion:
                   type: string
       responses:
         '200':
@@ -150,16 +147,16 @@ paths:
             schema:
               type: object
               properties:
-                contenido:
+                content:
                   type: string
-                usuarioId:
+                user:
                   type: string
-                postId:
+                post:
                   type: string
               required:
-              - contenido
-              - usuarioId
-              - postId
+              - content
+              - user
+              - post
       responses:
         '201':
           description: Comentario creado exitosamente
@@ -200,16 +197,21 @@ paths:
             schema:
               type: object
               properties:
-                titulo:
+                textoPost:
                   type: string
-                contenido:
+                user:
                   type: string
-                usuarioId:
-                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+                images:
+                  type: array
+                  items:
+                    type: string
               required:
-              - titulo
-              - contenido
-              - usuarioId
+              - textoPost
+              - user
       responses:
         '201':
           description: Post creado exitosamente
@@ -255,7 +257,7 @@ paths:
             schema:
               type: object
               properties:
-                imagenes:
+                images:
                   type: array
                   items:
                     type: string
